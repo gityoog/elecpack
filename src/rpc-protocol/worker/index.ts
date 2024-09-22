@@ -1,5 +1,5 @@
 import { isMainThread, parentPort, workerData, Worker, WorkerOptions, MessagePort } from 'worker_threads'
-import RpcDispatch from '../../rpc-dispatch'
+import RpcDispatch from '../../common/rpc-dispatch'
 
 type TDefault = {
   data?: any

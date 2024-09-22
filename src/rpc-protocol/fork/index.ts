@@ -1,4 +1,4 @@
-import RpcDispatch from '../../rpc-dispatch'
+import RpcDispatch from '../../common/rpc-dispatch'
 import { fork, ChildProcess, ForkOptions } from 'child_process'
 
 type TDefault = {

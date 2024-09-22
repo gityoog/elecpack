@@ -1,5 +1,3 @@
-import { getErrorMsg } from "../util"
-
 type listener = (...args: any[]) => void
 type asyncFn = (...args: any[]) => Promise<any>
 type callback = (result: {
@@ -186,6 +184,13 @@ class RpcDispatch<T extends {
     this.handler = null!
     this.callback = null!
   }
+}
+
+function getErrorMsg(e: unknown): string {
+  if (e instanceof Error) return e.message
+  if (typeof e === 'string') return e
+  if (e && typeof e === 'object' && 'message' in e) return (e as { message: string }).message
+  return 'unknown error'
 }
 
 export default RpcDispatch

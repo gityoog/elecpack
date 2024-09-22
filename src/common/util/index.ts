@@ -1,9 +1,4 @@
-export function getErrorMsg(e: unknown): string {
-  if (e instanceof Error) return e.message
-  if (typeof e === 'string') return e
-  if (e && typeof e === 'object' && 'message' in e) return (e as { message: string }).message
-  return 'unknown error'
-}
+
 
 export function delay(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))
