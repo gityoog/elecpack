@@ -6,11 +6,20 @@ const RendererBuildConfig: WebpackBuilder.ConfigFile = {
       resolve: {
         extensions: [".js", ".ts", ".json"]
       },
-      externals: {
-        electron: 'window.electron',
-        'worker_threads': 'window.worker_threads',
-        'child_process': 'window.child_process',
-      }
+      externals: ({ request }, callback) => {
+        const commonjs2: Record<string, string> = {
+          electron: 'window.electron',
+          'worker_threads': 'commonjs2 worker_threads',
+          'child_process': 'commonjs2 child_process',
+        }
+        if (request && commonjs2[request]) {
+          return callback(undefined, commonjs2[request])
+        }
+        if (request && /^node\:/.test(request)) {
+          return callback(undefined, 'commonjs2 ' + request.slice(5))
+        }
+        callback()
+      },
     }
   }
 }

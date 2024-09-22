@@ -79,6 +79,27 @@ class WebpackBuilderRunner {
     process.env.test = JSON.stringify(options.config)
     this.compiler = await this.buildCompiler({ options, configuration: { entry: options.entry }, mode: 'production' })
     const files = Object.keys(options.entry).reduce((acc, key) => (acc[key] = path.resolve(options.output, key + '.js'), acc), {} as Record<string, string>)
+    return this.handleCompile(files)
+  }
+
+  async devServer(options: htmlOptions) {
+    process.env.test = JSON.stringify(options.config)
+    const config = await this.getDevSeverConfig(options)
+    const entries = await this.buildHtmlCompiler(options, 'development')
+    const host = config.host || '127.0.0.1'
+    const port = await WebpackDevServer.getFreePort(config.port || 30000, host)
+    this.server = new WebpackDevServer({ ...config, host, port }, this.compiler!)
+    await this.server.start()
+    return entries.reduce((acc, item) => (acc[item.name] = `http://${host}:${port}/${item.url}`, acc), {} as Record<string, string>)
+  }
+
+  async compileHtml(options: htmlOptions) {
+    const entries = await this.buildHtmlCompiler(options, 'production')
+    const files = entries.reduce((acc, item) => (acc[item.name] = path.resolve(options.output, item.url), acc), {} as Record<string, string>)
+    return this.handleCompile(files)
+  }
+
+  private async handleCompile(files: Record<string, string>) {
     return new Promise<Record<string, string>>((resolve, reject) => {
       this.compiler!.run((err, stats) => {
         if (err) {
@@ -98,31 +119,6 @@ class WebpackBuilderRunner {
           } else {
             resolve(files)
           }
-        }
-      })
-    })
-  }
-
-  async devServer(options: htmlOptions) {
-    process.env.test = JSON.stringify(options.config)
-    const config = await this.getDevSeverConfig(options)
-    const entries = await this.buildHtmlCompiler(options, 'development')
-    const host = config.host || '127.0.0.1'
-    const port = await WebpackDevServer.getFreePort(config.port || 30000, host)
-    this.server = new WebpackDevServer({ ...config, host, port }, this.compiler!)
-    await this.server.start()
-    return entries.reduce((acc, item) => (acc[item.name] = `http://${host}:${port}/${item.url}`, acc), {} as Record<string, string>)
-  }
-
-  async compileHtml(options: htmlOptions) {
-    const entries = await this.buildHtmlCompiler(options, 'production')
-    const files = entries.reduce((acc, item) => (acc[item.name] = path.resolve(options.output, item.url), acc), {} as Record<string, string>)
-    return new Promise<Record<string, string>>((resolve, reject) => {
-      this.compiler!.run((err, stats) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(files)
         }
       })
     })
