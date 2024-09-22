@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
-const rpc_dispatch_1 = __importDefault(require("../../rpc-dispatch"));
+const rpc_dispatch_1 = __importDefault(require("../../common/rpc-dispatch"));
 class ElectronRpcProtocol {
     constructor(name) {
         this.name = '_ElectronRpcProtocol_' + name;

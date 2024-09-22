@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const worker_threads_1 = require("worker_threads");
-const rpc_dispatch_1 = __importDefault(require("../../rpc-dispatch"));
+const rpc_dispatch_1 = __importDefault(require("../../common/rpc-dispatch"));
 class WorkerRpcProtocol {
     constructor(filename) {
         this.filename = filename;

@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const util_1 = require("../util");
 class RpcDispatch {
     constructor() {
         this.listeners = {};
@@ -58,7 +57,7 @@ class RpcDispatch {
                             }
                         }, ex);
                     }).catch((err) => {
-                        const error = new Error((0, util_1.getErrorMsg)(err));
+                        const error = new Error(getErrorMsg(err));
                         error.stack = err === null || err === void 0 ? void 0 : err.stack;
                         this.fire({
                             channel,
@@ -150,5 +149,14 @@ class RpcDispatch {
         this.handler = null;
         this.callback = null;
     }
+}
+function getErrorMsg(e) {
+    if (e instanceof Error)
+        return e.message;
+    if (typeof e === 'string')
+        return e;
+    if (e && typeof e === 'object' && 'message' in e)
+        return e.message;
+    return 'unknown error';
 }
 exports.default = RpcDispatch;

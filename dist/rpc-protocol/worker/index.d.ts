@@ -1,5 +1,5 @@
 import { Worker, WorkerOptions } from 'worker_threads';
-import RpcDispatch from '../../rpc-dispatch';
+import RpcDispatch from '../../common/rpc-dispatch';
 type TDefault = {
     data?: any;
     main: Record<string, RpcDispatch.args | RpcDispatch.call>;

@@ -1,18 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getErrorMsg = getErrorMsg;
 exports.delay = delay;
 exports.createUUID = createUUID;
 exports.formatDate = formatDate;
-function getErrorMsg(e) {
-    if (e instanceof Error)
-        return e.message;
-    if (typeof e === 'string')
-        return e;
-    if (e && typeof e === 'object' && 'message' in e)
-        return e.message;
-    return 'unknown error';
-}
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }

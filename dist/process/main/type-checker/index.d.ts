@@ -3,6 +3,6 @@ export default class MainTypeChecker {
     private terminal;
     private console;
     private checker;
-    start(): Promise<any>;
+    start(): Promise<void>;
     stop(): Promise<void>;
 }

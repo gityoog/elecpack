@@ -1,5 +1,5 @@
 import { WebContents } from "electron";
-import RpcDispatch from '../../rpc-dispatch';
+import RpcDispatch from '../../common/rpc-dispatch';
 type TDefault = {
     main: Record<string, RpcDispatch.args | RpcDispatch.call>;
     renderer: Record<string, RpcDispatch.args | RpcDispatch.call>;
