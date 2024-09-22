@@ -52,6 +52,30 @@ class WebpackBuilderRunner {
             process.env.test = JSON.stringify(options.config);
             this.compiler = yield this.buildCompiler({ options, configuration: { entry: options.entry }, mode: 'production' });
             const files = Object.keys(options.entry).reduce((acc, key) => (acc[key] = path_1.default.resolve(options.output, key + '.js'), acc), {});
+            return this.handleCompile(files);
+        });
+    }
+    devServer(options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            process.env.test = JSON.stringify(options.config);
+            const config = yield this.getDevSeverConfig(options);
+            const entries = yield this.buildHtmlCompiler(options, 'development');
+            const host = config.host || '127.0.0.1';
+            const port = yield webpack_dev_server_1.default.getFreePort(config.port || 30000, host);
+            this.server = new webpack_dev_server_1.default(Object.assign(Object.assign({}, config), { host, port }), this.compiler);
+            yield this.server.start();
+            return entries.reduce((acc, item) => (acc[item.name] = `http://${host}:${port}/${item.url}`, acc), {});
+        });
+    }
+    compileHtml(options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const entries = yield this.buildHtmlCompiler(options, 'production');
+            const files = entries.reduce((acc, item) => (acc[item.name] = path_1.default.resolve(options.output, item.url), acc), {});
+            return this.handleCompile(files);
+        });
+    }
+    handleCompile(files) {
+        return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve, reject) => {
                 this.compiler.run((err, stats) => {
                     if (err) {
@@ -71,34 +95,6 @@ class WebpackBuilderRunner {
                         else {
                             resolve(files);
                         }
-                    }
-                });
-            });
-        });
-    }
-    devServer(options) {
-        return __awaiter(this, void 0, void 0, function* () {
-            process.env.test = JSON.stringify(options.config);
-            const config = yield this.getDevSeverConfig(options);
-            const entries = yield this.buildHtmlCompiler(options, 'development');
-            const host = config.host || '127.0.0.1';
-            const port = yield webpack_dev_server_1.default.getFreePort(config.port || 30000, host);
-            this.server = new webpack_dev_server_1.default(Object.assign(Object.assign({}, config), { host, port }), this.compiler);
-            yield this.server.start();
-            return entries.reduce((acc, item) => (acc[item.name] = `http://${host}:${port}/${item.url}`, acc), {});
-        });
-    }
-    compileHtml(options) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const entries = yield this.buildHtmlCompiler(options, 'production');
-            const files = entries.reduce((acc, item) => (acc[item.name] = path_1.default.resolve(options.output, item.url), acc), {});
-            return new Promise((resolve, reject) => {
-                this.compiler.run((err, stats) => {
-                    if (err) {
-                        reject(err);
-                    }
-                    else {
-                        resolve(files);
                     }
                 });
             });

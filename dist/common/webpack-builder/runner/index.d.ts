@@ -46,6 +46,7 @@ declare class WebpackBuilderRunner {
     compile(options: fileOptions): Promise<Record<string, string>>;
     devServer(options: htmlOptions): Promise<Record<string, string>>;
     compileHtml(options: htmlOptions): Promise<Record<string, string>>;
+    private handleCompile;
     private buildHtmlCompiler;
     private getDevSeverConfig;
     private buildCompiler;
