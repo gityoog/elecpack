@@ -1,4 +1,4 @@
-import { ForkRpcProtocol, WorkerRpcProtocol } from "../../../../common/rpc-protocol"
+import WorkerRpcProtocol from "../../../../rpc-protocol/worker"
 
 const MainTypeCheckerRpc = new WorkerRpcProtocol<{
   main: {

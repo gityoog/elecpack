@@ -16,7 +16,7 @@ const ProdMainBuildConfig: WebpackBuilder.ConfigFile = {
         if (request) {
           const result = /build[\\/]koffi[\\/](.*?)[\\/]/.exec(request)
           if (result && result[1] !== 'win32_x64') {
-            return callback(null, 'window.Koffi')
+            return callback(null, 'global.Koffi')
           }
         }
         callback()

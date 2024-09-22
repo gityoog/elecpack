@@ -1,6 +1,6 @@
-import { ForkRpcProtocol, WorkerRpcProtocol } from "../../rpc-protocol"
 import { StatsCompilation, StatsError } from "webpack"
 import WebpackBuilderRunner from "../runner"
+import WorkerRpcProtocol from "../../../rpc-protocol/worker"
 
 const WebpackBuilderRpc = new WorkerRpcProtocol<{
   main: {

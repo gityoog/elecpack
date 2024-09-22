@@ -1,49 +1,24 @@
 import path from 'path'
 import MainCommon from '../common/main'
 
-const options: {
-  mode: 'url' | 'file'
-  preload: Record<string, string>
-  renderer: Record<string, string>
-  files: Record<string, string>
-  assets?: string
-} = {
-  mode: 'url',
-  preload: {},
-  renderer: {},
-  files: {}
-}
-try {
-  const text = MainCommon.getEnv()
-  if (text) {
-    const env = JSON.parse(text) as typeof options
-    options.mode = env.mode || 'url'
-    options.preload = env.preload
-    options.renderer = env.renderer
-    options.files = env.files
-    options.assets = env.assets
-  }
-} catch (e) {
-  console.error(e)
-}
-
+const Env = MainCommon.getEnv()
 
 const ElecpackRuntime = {
   define: MainCommon.getDefine(),
   isDev() {
-    return options.mode === 'url'
+    return Env.mode === 'url'
   },
   getRenderer(name: string) {
-    return options.renderer[name]
+    return Env.renderer[name]
   },
   getPreload(name: string) {
-    return options.preload[name]
+    return Env.preload[name]
   },
-  getFilePath(name: string) {
-    return options.files[name]
+  getFiles(name: string) {
+    return Env.files[name]
   },
-  resolveAssets(filename: string) {
-    return options.assets ? path.resolve(options.assets, filename) : filename
+  getAssets(filename: string) {
+    return Env.assets ? path.resolve(Env.assets, filename) : filename
   },
   load({ name, hash }: {
     name: string
@@ -54,9 +29,9 @@ const ElecpackRuntime = {
   }) {
     const suffix = hash ? (hash.startsWith('#') ? hash : `#${hash}`) : ''
     const renderer = this.getRenderer(name) + suffix
-    if (options.mode === 'url') {
+    if (Env.mode === 'url') {
       return bw.loadURL(renderer)
-    } else if (options.mode === 'file') {
+    } else if (Env.mode === 'file') {
       return bw.loadFile(renderer)
     }
   }
