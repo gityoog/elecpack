@@ -7,10 +7,10 @@ declare class WebpackBuilder {
     private category;
     constructor(name: string);
     private init;
-    devServer(options: WebpackBuilder.HtmlOptions): Promise<Record<string, string>>;
-    compileHtml(options: WebpackBuilder.HtmlOptions): Promise<Record<string, string>>;
-    compile(options: WebpackBuilder.FileOptions): Promise<Record<string, string>>;
-    watch(options: WebpackBuilder.FileOptions): Promise<Record<string, string>>;
+    devServer(options: WebpackBuilder.HtmlOptions): Promise<any>;
+    compileHtml(options: WebpackBuilder.HtmlOptions): Promise<any>;
+    compile(options: WebpackBuilder.FileOptions): Promise<any>;
+    watch(options: WebpackBuilder.FileOptions): Promise<any>;
     stop(): Promise<void>;
 }
 declare namespace WebpackBuilder {

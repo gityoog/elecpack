@@ -1,5 +1,8 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const rpc_protocol_1 = require("../../../../common/rpc-protocol");
-const MainTypeCheckerRpc = new rpc_protocol_1.WorkerRpcProtocol(require.resolve('../child'));
+const worker_1 = __importDefault(require("../../../../rpc-protocol/worker"));
+const MainTypeCheckerRpc = new worker_1.default(require.resolve('../child'));
 exports.default = MainTypeCheckerRpc;

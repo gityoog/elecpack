@@ -5,50 +5,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const main_1 = __importDefault(require("../common/main"));
-const options = {
-    mode: 'url',
-    preload: {},
-    renderer: {},
-    files: {}
-};
-try {
-    const text = main_1.default.getEnv();
-    if (text) {
-        const env = JSON.parse(text);
-        options.mode = env.mode || 'url';
-        options.preload = env.preload;
-        options.renderer = env.renderer;
-        options.files = env.files;
-        options.assets = env.assets;
-    }
-}
-catch (e) {
-    console.error(e);
-}
+const Env = main_1.default.getEnv();
 const ElecpackRuntime = {
     define: main_1.default.getDefine(),
     isDev() {
-        return options.mode === 'url';
+        return Env.mode === 'url';
     },
     getRenderer(name) {
-        return options.renderer[name];
+        return Env.renderer[name];
     },
     getPreload(name) {
-        return options.preload[name];
+        return Env.preload[name];
     },
-    getFilePath(name) {
-        return options.files[name];
+    getFiles(name) {
+        return Env.files[name];
     },
-    resolveAssets(filename) {
-        return options.assets ? path_1.default.resolve(options.assets, filename) : filename;
+    getAssets(filename) {
+        return Env.assets ? path_1.default.resolve(Env.assets, filename) : filename;
     },
     load({ name, hash }, bw) {
         const suffix = hash ? (hash.startsWith('#') ? hash : `#${hash}`) : '';
         const renderer = this.getRenderer(name) + suffix;
-        if (options.mode === 'url') {
+        if (Env.mode === 'url') {
             return bw.loadURL(renderer);
         }
-        else if (options.mode === 'file') {
+        else if (Env.mode === 'file') {
             return bw.loadFile(renderer);
         }
     }

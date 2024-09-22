@@ -5,6 +5,6 @@ export default class MainProdProcess {
         preload: Record<string, string>;
         renderer: Record<string, string>;
         files: Record<string, string>;
-    }): Promise<Record<string, string>>;
+    }): Promise<any>;
     stop(): Promise<void>;
 }

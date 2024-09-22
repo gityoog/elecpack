@@ -1,4 +1,4 @@
-import { WorkerRpcProtocol } from "../../../../common/rpc-protocol";
+import WorkerRpcProtocol from "../../../../rpc-protocol/worker";
 declare const MainTypeCheckerRpc: WorkerRpcProtocol<{
     main: {
         start: (data: {

@@ -3,8 +3,8 @@ declare const ElecpackRuntime: {
     isDev(): boolean;
     getRenderer(name: string): string;
     getPreload(name: string): string;
-    getFilePath(name: string): string;
-    resolveAssets(filename: string): string;
+    getFiles(name: string): string;
+    getAssets(filename: string): string;
     load({ name, hash }: {
         name: string;
         hash?: string;

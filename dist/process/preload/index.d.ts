@@ -1,6 +1,6 @@
 export default class PreloadProcess {
     private config;
     private builder;
-    start(watch?: boolean): Promise<Record<string, string>>;
+    start(watch?: boolean): Promise<any>;
     stop(): Promise<void>;
 }
