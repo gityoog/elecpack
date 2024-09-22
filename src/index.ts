@@ -1,5 +1,3 @@
-
-
 import ElecpackRuntime from "./runtime"
 import ElecpackBuilder from "./builder"
 import type WebpackBuilder from "./common/webpack-builder"
@@ -15,4 +13,3 @@ export {
   ForkRpcProtocol,
   ElectronRpcProtocol
 }
-
