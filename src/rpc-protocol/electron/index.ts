@@ -1,6 +1,6 @@
 import { IpcRendererEvent, WebContents, contextBridge, ipcMain, ipcRenderer } from "electron"
 import RpcDispatch from '../../common/rpc-dispatch'
-
+type Iknown = any
 type TDefault = {
   main: Record<string, RpcDispatch.args | RpcDispatch.call>
   renderer: Record<string, RpcDispatch.args | RpcDispatch.call>

@@ -4,7 +4,7 @@ type callback = (result: {
   status: 'success' | 'error'
   data: any
 }) => void
-
+type IPromise<T> = T extends Promise<infer U> ? Promise<U> : Promise<T>
 type messageType = {
   type: 'event'
   data: any[]
