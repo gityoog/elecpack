@@ -161,7 +161,11 @@ class WebpackBuilderRunner {
                     patterns: [pattern]
                 }));
             }
-            return (0, webpack_1.default)((0, webpack_merge_1.default)(webpackConfig, {
+            return (0, webpack_1.default)((0, webpack_merge_1.default)({
+                ignoreWarnings: [
+                    /Critical dependency: the request of a dependency is an expression/,
+                ]
+            }, webpackConfig, {
                 mode,
                 plugins,
                 context,
