@@ -203,7 +203,11 @@ class WebpackBuilderRunner {
         patterns: [pattern]
       }))
     }
-    return webpack(merge(webpackConfig, {
+    return webpack(merge({
+      ignoreWarnings: [
+        /Critical dependency: the request of a dependency is an expression/,
+      ]
+    }, webpackConfig, {
       mode,
       plugins,
       context,
