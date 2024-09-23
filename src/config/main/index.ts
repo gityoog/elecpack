@@ -105,7 +105,7 @@ class MainConfig {
             renderer,
             files,
             assets: ${JSON.stringify(this.assets !== undefined)} ? 
-              path.resolve(root, ${JSON.stringify(relative)}, 'assets')
+              path.resolve(root, ${JSON.stringify(relative)}, ${MainConfig.MAIN}, 'assets')
             : undefined
           })
         })()`
