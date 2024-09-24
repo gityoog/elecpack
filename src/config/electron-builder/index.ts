@@ -1,5 +1,5 @@
 import { Inject, Service } from "@gityoog/ioc-di"
-import { Configuration } from 'electron-builder'
+import { Arch, Configuration, Platform } from 'electron-builder'
 import OutputConfig from "../output"
 
 
@@ -7,6 +7,7 @@ type options = {
   name: string
   version: string
   configuration?: Configuration
+  targets?: Map<Platform, Map<Arch, string[]>>
 }
 
 @Service()
@@ -17,11 +18,13 @@ class ElectronBuilderConfig {
   private configuration: Configuration = {}
   private name: string = ''
   private version: string = ''
+  private targets?: Map<Platform, Map<Arch, string[]>>
   setOptions(options: options) {
     this.enabled = true
     this.configuration = options.configuration || {}
     this.name = options.name
     this.version = options.version
+    this.targets = options.targets
   }
 
   isEnabled() {
@@ -30,6 +33,10 @@ class ElectronBuilderConfig {
 
   getProjectDir() {
     return this.outputConfig.resolve()
+  }
+
+  getTargets() {
+    return this.targets || Platform.current().createTarget()
   }
 
   getConfiguration() {

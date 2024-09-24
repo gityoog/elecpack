@@ -28,7 +28,7 @@ export default class ElectronBuilderProcess {
         console.error(e)
       }
       return await build({
-        targets: Platform.current().createTarget(),
+        targets: this.config.getTargets(),
         projectDir: this.config.getProjectDir(),
         config: {
           removePackageScripts: true,
