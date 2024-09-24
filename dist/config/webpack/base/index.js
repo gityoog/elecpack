@@ -26,7 +26,7 @@ let WebpackBuilderBaseConfig = class WebpackBuilderBaseConfig {
         this.output = this.outputConfig.resolve(this.def.output || this.def.name);
         this.bytecode = options.bytecode;
         this.configFile = [];
-        if (this.def.config) {
+        if (!options.skipDefConfigFile && this.def.config) {
             this.configFile.push(this.def.config);
         }
         if (options.configFile) {

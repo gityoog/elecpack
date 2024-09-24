@@ -9,6 +9,7 @@ type options = {
     define?: Record<string, any>;
     configFile?: string | string[];
     bytecode?: WebpackBuilder.Bytecode;
+    skipDefConfigFile?: boolean;
 };
 type fileOptions = options & {
     entry: Record<string, string>;
