@@ -1,6 +1,6 @@
 import { StatsCompilation } from "webpack";
 import WebpackBuilderRunner from "../runner";
-import WorkerRpcProtocol from "../../../rpc-protocol/worker";
+import WorkerRpcProtocol from "some-rpc/worker";
 declare const WebpackBuilderRpc: WorkerRpcProtocol<{
     main: {
         watch: (data: WebpackBuilderRunner.FileOptions) => Promise<Record<string, string>>;
