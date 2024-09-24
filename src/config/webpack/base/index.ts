@@ -9,6 +9,7 @@ type options = {
   define?: Record<string, any>
   configFile?: string | string[]
   bytecode?: WebpackBuilder.Bytecode
+  skipDefConfigFile?: boolean
 }
 
 type fileOptions = options & {
@@ -53,7 +54,7 @@ class WebpackBuilderBaseConfig {
     this.bytecode = options.bytecode
 
     this.configFile = []
-    if (this.def.config) {
+    if (!options.skipDefConfigFile && this.def.config) {
       this.configFile.push(this.def.config)
     }
     if (options.configFile) {
