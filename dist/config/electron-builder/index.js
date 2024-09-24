@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const ioc_di_1 = require("@gityoog/ioc-di");
+const electron_builder_1 = require("electron-builder");
 const output_1 = __importDefault(require("../output"));
 let ElectronBuilderConfig = class ElectronBuilderConfig {
     constructor() {
@@ -26,12 +27,16 @@ let ElectronBuilderConfig = class ElectronBuilderConfig {
         this.configuration = options.configuration || {};
         this.name = options.name;
         this.version = options.version;
+        this.targets = options.targets;
     }
     isEnabled() {
         return this.enabled;
     }
     getProjectDir() {
         return this.outputConfig.resolve();
+    }
+    getTargets() {
+        return this.targets || electron_builder_1.Platform.current().createTarget();
     }
     getConfiguration() {
         return this.configuration;

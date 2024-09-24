@@ -1,5 +1,5 @@
+import type { ChildProcess, ForkOptions } from 'child_process';
 import RpcDispatch from '../../common/rpc-dispatch';
-import { ChildProcess, ForkOptions } from 'child_process';
 type TDefault = {
     main: Record<string, RpcDispatch.args | RpcDispatch.call>;
     child: Record<string, RpcDispatch.args | RpcDispatch.call>;

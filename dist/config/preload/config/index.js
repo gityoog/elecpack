@@ -24,12 +24,6 @@ const PreloadBuildConfig = {
                     extensions: [".js", ".ts", ".json"]
                 },
                 externals: ({ request }, callback) => {
-                    const commonjs2 = {
-                        electron: 'commonjs2 electron',
-                    };
-                    if (request && commonjs2[request]) {
-                        return callback(undefined, commonjs2[request]);
-                    }
                     if (request && /^node\:/.test(request)) {
                         return callback(undefined, 'commonjs2 ' + request.slice(5));
                     }

@@ -1,8 +1,9 @@
-import { Configuration } from 'electron-builder';
+import { Arch, Configuration, Platform } from 'electron-builder';
 type options = {
     name: string;
     version: string;
     configuration?: Configuration;
+    targets?: Map<Platform, Map<Arch, string[]>>;
 };
 declare class ElectronBuilderConfig {
     private outputConfig;
@@ -10,9 +11,11 @@ declare class ElectronBuilderConfig {
     private configuration;
     private name;
     private version;
+    private targets?;
     setOptions(options: options): void;
     isEnabled(): boolean;
     getProjectDir(): string;
+    getTargets(): Map<Platform, Map<Arch, string[]>>;
     getConfiguration(): Configuration;
     getName(): string;
     getVersion(): string;

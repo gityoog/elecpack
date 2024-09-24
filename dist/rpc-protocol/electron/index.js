@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const electron_1 = require("electron");
 const rpc_dispatch_1 = __importDefault(require("../../common/rpc-dispatch"));
 class ElectronRpcProtocol {
     constructor(name) {
@@ -23,14 +22,15 @@ class Main extends rpc_dispatch_1.default {
     constructor(channel, webContents) {
         super();
         if (!webContents) {
-            electron_1.ipcMain.on(channel, (event, message) => this.emit(message, event.sender));
+            const ipcMain = eval("require")("electron").ipcMain;
+            ipcMain.on(channel, (event, message) => this.emit(message, event.sender));
             this.onMessage((message, sender) => {
                 if (sender) {
                     sender.send(channel, message);
                 }
             });
             this.beforeDestroy(() => {
-                electron_1.ipcMain.removeAllListeners(channel);
+                ipcMain.removeAllListeners(channel);
             });
         }
         else {
@@ -51,25 +51,26 @@ class Preload {
     constructor(channel) {
         this.channel = channel;
         const event = {};
+        const ipcRenderer = eval("require")("electron").ipcRenderer;
         const api = {
             emit: (message) => {
-                electron_1.ipcRenderer.send(channel, message);
+                ipcRenderer.send(channel, message);
             },
             on: (callback) => {
                 const id = Math.random().toString(36).slice(2);
                 event[id] = (event, message) => callback(message);
-                electron_1.ipcRenderer.on(channel, event[id]);
+                ipcRenderer.on(channel, event[id]);
                 return id;
             },
             off: (id) => {
                 if (event[id]) {
-                    electron_1.ipcRenderer.off(channel, event[id]);
+                    ipcRenderer.off(channel, event[id]);
                     delete event[id];
                 }
             }
         };
         if (process.contextIsolated) {
-            electron_1.contextBridge.exposeInMainWorld(this.channel, api);
+            eval('require')('electron').contextBridge.exposeInMainWorld(this.channel, api);
         }
         else {
             window[this.channel] = api;
@@ -84,7 +85,12 @@ class Renderer extends rpc_dispatch_1.default {
             throw new Error('must be called in renderer process');
         }
         if (!(this.channel in window)) {
-            throw new Error('not expose api in preload script');
+            if ('require' in window) {
+                new Preload(this.channel);
+            }
+            else {
+                throw new Error('not expose api in preload script');
+            }
         }
         const api = window[this.channel];
         const callback = (message) => this.emit(message);

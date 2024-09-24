@@ -13,10 +13,7 @@ const MainWorkerConfig = {
             resolve: {
                 extensions: [".js", ".ts", ".json"]
             },
-            externals: [{
-                    worker_threads: 'commonjs worker_threads',
-                    child_process: 'commonjs child_process',
-                }, function ({ context, request }, callback) {
+            externals: [function ({ context, request }, callback) {
                     if (request) {
                         const result = /build[\\/]koffi[\\/](.*?)[\\/]/.exec(request);
                         if (result && result[1] !== 'win32_x64') {

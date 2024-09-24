@@ -48,7 +48,7 @@ let ElectronBuilderProcess = class ElectronBuilderProcess {
                     console.error(e);
                 }
                 return yield (0, electron_builder_2.build)({
-                    targets: electron_builder_2.Platform.current().createTarget(),
+                    targets: this.config.getTargets(),
                     projectDir: this.config.getProjectDir(),
                     config: Object.assign(Object.assign({ removePackageScripts: true, buildDependenciesFromSource: false, npmRebuild: false, compression: 'store', nodeGypRebuild: false, asar: false, win: {
                             target: 'portable'

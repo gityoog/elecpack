@@ -1,4 +1,4 @@
-import { Worker, WorkerOptions } from 'worker_threads';
+import type { Worker, WorkerOptions } from 'worker_threads';
 import RpcDispatch from '../../common/rpc-dispatch';
 type TDefault = {
     data?: any;
