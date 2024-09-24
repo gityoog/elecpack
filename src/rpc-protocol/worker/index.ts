@@ -1,4 +1,4 @@
-import { isMainThread, parentPort, workerData, Worker, WorkerOptions, MessagePort } from 'worker_threads'
+import type { Worker, WorkerOptions, MessagePort } from 'worker_threads'
 import RpcDispatch from '../../common/rpc-dispatch'
 
 type TDefault = {
@@ -34,7 +34,7 @@ class WorkerRpcProtocol<T extends TDefault> {
   constructor(private filename: string | URL) { }
   main(options: toOptions<T>) {
     return new Main<toMain<T>>(
-      new Worker(this.filename, options as WorkerOptions | undefined)
+      new (eval('require')('worker_threads').Worker as typeof Worker)(this.filename, options as WorkerOptions | undefined)
     )
   }
   child() {
@@ -66,6 +66,8 @@ class Main<T extends TProtocol> extends RpcDispatch<T> {
 
 class Child<T extends TProtocol> extends RpcDispatch<T> {
   constructor() {
+    const parentPort = eval('require')('worker_threads').parentPort as MessagePort | undefined
+    const isMainThread = eval('require')('worker_threads').isMainThread as boolean
     if (isMainThread || !parentPort) {
       throw new Error('cannot run in main thread')
     }
@@ -75,7 +77,7 @@ class Child<T extends TProtocol> extends RpcDispatch<T> {
     this.onMessage(message => parentPort!.postMessage(message))
   }
   get data(): T['data'] extends known ? T['data'] : never {
-    return workerData
+    return eval('require')('worker_threads').workerData
   }
 }
 

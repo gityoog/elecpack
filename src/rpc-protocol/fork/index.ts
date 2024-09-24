@@ -1,5 +1,5 @@
+import type { fork, ChildProcess, ForkOptions } from 'child_process'
 import RpcDispatch from '../../common/rpc-dispatch'
-import { fork, ChildProcess, ForkOptions } from 'child_process'
 
 type TDefault = {
   main: Record<string, RpcDispatch.args | RpcDispatch.call>
@@ -29,7 +29,7 @@ class ForkRpcProtocol<T extends TDefault> {
   constructor(private modulePath: string, private args?: readonly string[]) { }
   main(options: ForkOptions) {
     return new Main<toMain<T>>(
-      fork(this.modulePath, this.args, options)
+      (eval('require')('child_process').fork as typeof fork)(this.modulePath, this.args, options)
     )
   }
   child() {

@@ -11,12 +11,6 @@ const PreloadBuildConfig: WebpackBuilder.ConfigFile = {
         extensions: [".js", ".ts", ".json"]
       },
       externals: ({ request }, callback) => {
-        const commonjs2: Record<string, string> = {
-          electron: 'commonjs2 electron',
-        }
-        if (request && commonjs2[request]) {
-          return callback(undefined, commonjs2[request])
-        }
         if (request && /^node\:/.test(request)) {
           return callback(undefined, 'commonjs2 ' + request.slice(5))
         }

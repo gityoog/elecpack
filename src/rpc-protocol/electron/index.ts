@@ -1,4 +1,4 @@
-import { IpcRendererEvent, WebContents, contextBridge, ipcMain, ipcRenderer } from "electron"
+import type { IpcRendererEvent, WebContents, ContextBridge, IpcMain, IpcRenderer } from "electron"
 import RpcDispatch from '../../common/rpc-dispatch'
 type Iknown = any
 type TDefault = {
@@ -47,6 +47,7 @@ class Main<T extends TProtocol> extends RpcDispatch<T> {
   constructor(channel: string, webContents?: WebContents) {
     super()
     if (!webContents) {
+      const ipcMain = eval("require")("electron").ipcMain as IpcMain
       ipcMain.on(channel, (event, message) => this.emit(message, event.sender))
       this.onMessage((message, sender?: WebContents) => {
         if (sender) {
@@ -80,6 +81,7 @@ type Api = {
 class Preload {
   constructor(private channel: string) {
     const event: Record<string, any> = {}
+    const ipcRenderer = eval("require")("electron").ipcRenderer as IpcRenderer
     const api: Api = {
       emit: (message) => {
         ipcRenderer.send(channel, message)
@@ -99,7 +101,7 @@ class Preload {
     }
 
     if (process.contextIsolated) {
-      contextBridge.exposeInMainWorld(this.channel, api)
+      (eval('require')('electron').contextBridge as ContextBridge).exposeInMainWorld(this.channel, api)
     } else {
       window[this.channel as Iknown] = api as Iknown
     }
@@ -113,7 +115,11 @@ class Renderer<T extends TProtocol> extends RpcDispatch<T> {
       throw new Error('must be called in renderer process')
     }
     if (!(this.channel in window)) {
-      throw new Error('not expose api in preload script')
+      if ('require' in window) {
+        new Preload(this.channel)
+      } else {
+        throw new Error('not expose api in preload script')
+      }
     }
     const api = (window as Record<string, any>)[this.channel] as Api
     const callback = (message: any) => this.emit(message)
