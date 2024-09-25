@@ -77,14 +77,18 @@ class MainConfig {
   getCheckerOutput() {
     return path.resolve(this.output, 'checker')
   }
-
+  relative(files: Record<string, string>) {
+    const result: Record<string, string> = {}
+    for (const key in files) {
+      result[key] = path.relative(this.output, files[key])
+    }
+    return result
+  }
   getFileOptions({ preload, renderer, files }: {
     preload: Record<string, string>,
     renderer: Record<string, string>,
     files: Record<string, string>
   }): WebpackBuilder.FileOptions {
-    const relative = path.relative(this.getEntry(), this.output)
-
     const define = {
       [`process.env.${MainConfig.DEFINE_KEY}`]: JSON.stringify(JSON.stringify(this.define || {})),
       [`process.env.${MainConfig.ENV_KEY}`]: `(() => {
@@ -92,13 +96,13 @@ class MainConfig {
           const root = __dirname
           function prefix(obj) {
             for(const key in obj) {
-              obj[key] = path.resolve(root, ${JSON.stringify(relative)}, obj[key])
+              obj[key] = path.resolve(root, obj[key])
             }
             return obj
           }
-          const preload = prefix(${JSON.stringify(preload)})
-          const renderer = prefix(${JSON.stringify(renderer)})
-          const files = prefix(${JSON.stringify(files)})
+          const preload = prefix(${JSON.stringify(this.relative(preload))})
+          const renderer = prefix(${JSON.stringify(this.relative(renderer))})
+          const files = prefix(${JSON.stringify(this.relative(files))})
           return JSON.stringify({
             mode: 'file',
             preload,
