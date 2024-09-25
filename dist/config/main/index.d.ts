@@ -32,6 +32,7 @@ declare class MainConfig {
     getAssets(): string | undefined;
     getDefine(): Record<string, any>;
     getCheckerOutput(): string;
+    relative(files: Record<string, string>): Record<string, string>;
     getFileOptions({ preload, renderer, files }: {
         preload: Record<string, string>;
         renderer: Record<string, string>;

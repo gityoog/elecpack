@@ -58,8 +58,14 @@ let MainConfig = MainConfig_1 = class MainConfig {
     getCheckerOutput() {
         return path_1.default.resolve(this.output, 'checker');
     }
+    relative(files) {
+        const result = {};
+        for (const key in files) {
+            result[key] = path_1.default.relative(this.output, files[key]);
+        }
+        return result;
+    }
     getFileOptions({ preload, renderer, files }) {
-        const relative = path_1.default.relative(this.getEntry(), this.output);
         const define = {
             [`process.env.${MainConfig_1.DEFINE_KEY}`]: JSON.stringify(JSON.stringify(this.define || {})),
             [`process.env.${MainConfig_1.ENV_KEY}`]: `(() => {
@@ -67,13 +73,13 @@ let MainConfig = MainConfig_1 = class MainConfig {
           const root = __dirname
           function prefix(obj) {
             for(const key in obj) {
-              obj[key] = path.resolve(root, ${JSON.stringify(relative)}, obj[key])
+              obj[key] = path.resolve(root, obj[key])
             }
             return obj
           }
-          const preload = prefix(${JSON.stringify(preload)})
-          const renderer = prefix(${JSON.stringify(renderer)})
-          const files = prefix(${JSON.stringify(files)})
+          const preload = prefix(${JSON.stringify(this.relative(preload))})
+          const renderer = prefix(${JSON.stringify(this.relative(renderer))})
+          const files = prefix(${JSON.stringify(this.relative(files))})
           return JSON.stringify({
             mode: 'file',
             preload,
