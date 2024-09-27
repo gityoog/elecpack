@@ -42,11 +42,17 @@ let WebpackBuilderBaseConfig = class WebpackBuilderBaseConfig {
         this.entry = options.entry;
     }
     getBaseOptions() {
+        const define = {};
+        if (this.define) {
+            for (const key in this.define) {
+                define[key] = JSON.stringify(this.define[key]);
+            }
+        }
         return {
             context: this.context,
             output: this.output,
             assets: this.assets,
-            define: this.define,
+            define: this.define ? define : undefined,
             config: this.configFile,
             bytecode: this.bytecode
         };
