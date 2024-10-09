@@ -26,33 +26,29 @@ const electron_builder_1 = __importDefault(require("../../config/electron-builde
 const electron_builder_2 = require("electron-builder");
 const fs_1 = require("fs");
 const output_1 = __importDefault(require("../../config/output"));
-const electron_1 = __importDefault(require("electron"));
-const path_1 = __importDefault(require("path"));
+const electronVersion_1 = require("app-builder-lib/out/electron/electronVersion");
 let ElectronBuilderProcess = class ElectronBuilderProcess {
     start() {
         return __awaiter(this, void 0, void 0, function* () {
             if (this.config.isEnabled()) {
+                let electronVersion = undefined;
+                try {
+                    electronVersion = yield (0, electronVersion_1.getElectronVersion)(process.cwd());
+                }
+                catch (e) {
+                    console.warn('Failed to get electron version, using default version');
+                }
                 (0, fs_1.writeFileSync)(this.output.resolve('package.json'), JSON.stringify({
                     name: this.config.getName(),
                     version: this.config.getVersion(),
                     main: './main/main.js'
                 }, null, 2));
-                let electronVersion;
-                try {
-                    const electronPath = electron_1.default;
-                    const packageJson = (0, fs_1.readFileSync)(path_1.default.resolve(electronPath, '../..', 'package.json'), 'utf8');
-                    const { version } = JSON.parse(packageJson);
-                    electronVersion = version;
-                }
-                catch (e) {
-                    console.error(e);
-                }
                 return yield (0, electron_builder_2.build)({
                     targets: this.config.getTargets(),
                     projectDir: this.config.getProjectDir(),
                     config: Object.assign(Object.assign({ removePackageScripts: true, buildDependenciesFromSource: false, npmRebuild: false, compression: 'store', nodeGypRebuild: false, asar: false, win: {
                             target: 'portable'
-                        }, electronVersion }, this.config.getConfiguration()), { directories: {
+                        }, electronVersion: electronVersion }, this.config.getConfiguration()), { directories: {
                             output: 'output',
                         }, files: [
                             '**/*',
