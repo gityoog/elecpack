@@ -3,8 +3,7 @@ import ElectronBuilderConfig from "../../config/electron-builder"
 import { build, Platform } from 'electron-builder'
 import { readFileSync, writeFileSync } from "fs"
 import OutputConfig from "../../config/output"
-import electron from 'electron'
-import path from "path"
+import { getElectronVersion } from 'app-builder-lib/out/electron/electronVersion'
 
 @Service()
 export default class ElectronBuilderProcess {
@@ -13,20 +12,17 @@ export default class ElectronBuilderProcess {
 
   async start() {
     if (this.config.isEnabled()) {
+      let electronVersion: string | undefined = undefined
+      try {
+        electronVersion = await getElectronVersion(process.cwd())
+      } catch (e) {
+        console.warn('Failed to get electron version, using default version')
+      }
       writeFileSync(this.output.resolve('package.json'), JSON.stringify({
         name: this.config.getName(),
         version: this.config.getVersion(),
         main: './main/main.js'
       }, null, 2))
-      let electronVersion: string | undefined
-      try {
-        const electronPath = electron as unknown as string
-        const packageJson = readFileSync(path.resolve(electronPath, '../..', 'package.json'), 'utf8')
-        const { version } = JSON.parse(packageJson)
-        electronVersion = version
-      } catch (e) {
-        console.error(e)
-      }
       return await build({
         targets: this.config.getTargets(),
         projectDir: this.config.getProjectDir(),
@@ -40,7 +36,7 @@ export default class ElectronBuilderProcess {
           win: {
             target: 'portable'
           },
-          electronVersion,
+          electronVersion: electronVersion,
           ...this.config.getConfiguration(),
           directories: {
             output: 'output',
