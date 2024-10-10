@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const electron_builder_1 = require("electron-builder");
 const output_1 = __importDefault(require("../output"));
 let ElectronBuilderConfig = class ElectronBuilderConfig {
@@ -49,10 +49,10 @@ let ElectronBuilderConfig = class ElectronBuilderConfig {
     }
 };
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", output_1.default)
 ], ElectronBuilderConfig.prototype, "outputConfig", void 0);
 ElectronBuilderConfig = __decorate([
-    (0, ioc_di_1.Service)()
+    (0, anydi_1.Service)()
 ], ElectronBuilderConfig);
 exports.default = ElectronBuilderConfig;

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const file_1 = __importDefault(require("../webpack/file"));
 let PreloadConfig = class PreloadConfig extends file_1.default {
     constructor() {
@@ -20,7 +20,7 @@ let PreloadConfig = class PreloadConfig extends file_1.default {
     }
 };
 PreloadConfig = __decorate([
-    (0, ioc_di_1.Service)(),
+    (0, anydi_1.Service)(),
     __metadata("design:paramtypes", [])
 ], PreloadConfig);
 exports.default = PreloadConfig;

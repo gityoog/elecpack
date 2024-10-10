@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = require("child_process");
 const watchpack_1 = __importDefault(require("watchpack"));
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const logger_1 = __importDefault(require("../../../common/logger"));
 const main_1 = __importDefault(require("../../../config/main"));
 const terminal_1 = __importDefault(require("../../../common/terminal"));
@@ -113,22 +113,22 @@ let MainDevProcess = class MainDevProcess {
     }
 };
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", logger_1.default)
 ], MainDevProcess.prototype, "logger", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", terminal_1.default)
 ], MainDevProcess.prototype, "terminal", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", main_1.default)
 ], MainDevProcess.prototype, "config", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", type_checker_1.default)
 ], MainDevProcess.prototype, "checker", void 0);
 MainDevProcess = __decorate([
-    (0, ioc_di_1.Service)()
+    (0, anydi_1.Service)()
 ], MainDevProcess);
 exports.default = MainDevProcess;

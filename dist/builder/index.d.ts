@@ -5,7 +5,6 @@ declare class ElecpackBuilder {
     private dev;
     private build;
     constructor(options: Config.Options);
-    private init;
     startDev(): Promise<void>;
     startBuild(): Promise<{
         result: string[] | undefined;

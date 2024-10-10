@@ -10,7 +10,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var FilesConfig_1;
 Object.defineProperty(exports, "__esModule", { value: true });
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const file_1 = __importDefault(require("../webpack/file"));
 let FilesConfig = FilesConfig_1 = class FilesConfig {
     constructor() {
@@ -19,7 +19,7 @@ let FilesConfig = FilesConfig_1 = class FilesConfig {
     setOptions(options) {
         this.files = Object.entries(options).map(([name, options]) => {
             const fileOptions = Object.assign(Object.assign({}, options), { entry: { [FilesConfig_1.main]: options.entry } });
-            const config = (0, ioc_di_1.Concat)(this, new file_1.default({ name, output: 'files/' + name }));
+            const config = (0, anydi_1.DiFrom)(this).for(() => new file_1.default({ name, output: 'files/' + name }));
             config.setOptions(fileOptions);
             return {
                 name,
@@ -33,6 +33,6 @@ let FilesConfig = FilesConfig_1 = class FilesConfig {
 };
 FilesConfig.main = 'main';
 FilesConfig = FilesConfig_1 = __decorate([
-    (0, ioc_di_1.Service)()
+    (0, anydi_1.Service)()
 ], FilesConfig);
 exports.default = FilesConfig;

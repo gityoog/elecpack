@@ -21,7 +21,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const files_1 = __importDefault(require("../../process/files"));
 const prod_1 = __importDefault(require("../../process/main/prod"));
 const preload_1 = __importDefault(require("../../process/preload"));
@@ -69,30 +69,30 @@ let ElecpackBuild = class ElecpackBuild {
     }
 };
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", output_1.default)
 ], ElecpackBuild.prototype, "output", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", prod_1.default)
 ], ElecpackBuild.prototype, "main", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", preload_1.default)
 ], ElecpackBuild.prototype, "preload", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", renderer_1.default)
 ], ElecpackBuild.prototype, "renderer", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", files_1.default)
 ], ElecpackBuild.prototype, "files", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", electron_builder_1.default)
 ], ElecpackBuild.prototype, "electronBuilder", void 0);
 ElecpackBuild = __decorate([
-    (0, ioc_di_1.Service)()
+    (0, anydi_1.Service)()
 ], ElecpackBuild);
 exports.default = ElecpackBuild;

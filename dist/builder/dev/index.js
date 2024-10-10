@@ -21,7 +21,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const files_1 = __importDefault(require("../../process/files"));
 const dev_1 = __importDefault(require("../../process/main/dev"));
 const preload_1 = __importDefault(require("../../process/preload"));
@@ -30,9 +30,6 @@ const output_1 = __importDefault(require("../../config/output"));
 const rimraf_1 = require("rimraf");
 let ElecpackDev = class ElecpackDev {
     constructor() {
-        this.init();
-    }
-    init() {
         this.main.onStop(() => {
             this.preload.stop();
             this.renderer.stop();
@@ -61,33 +58,27 @@ let ElecpackDev = class ElecpackDev {
     }
 };
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", output_1.default)
 ], ElecpackDev.prototype, "output", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", dev_1.default)
 ], ElecpackDev.prototype, "main", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", preload_1.default)
 ], ElecpackDev.prototype, "preload", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", renderer_1.default)
 ], ElecpackDev.prototype, "renderer", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", files_1.default)
 ], ElecpackDev.prototype, "files", void 0);
-__decorate([
-    ioc_di_1.Already,
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], ElecpackDev.prototype, "init", null);
 ElecpackDev = __decorate([
-    (0, ioc_di_1.Service)(),
+    (0, anydi_1.Service)(),
     __metadata("design:paramtypes", [])
 ], ElecpackDev);
 exports.default = ElecpackDev;

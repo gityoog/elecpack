@@ -21,7 +21,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const webpack_builder_1 = __importDefault(require("../../common/webpack-builder"));
 const files_1 = __importDefault(require("../../config/files"));
 let FilesProcess = class FilesProcess {
@@ -32,7 +32,7 @@ let FilesProcess = class FilesProcess {
         return __awaiter(this, void 0, void 0, function* () {
             const options = this.config.getOptions();
             const result = yield Promise.all(options.map((item) => __awaiter(this, void 0, void 0, function* () {
-                const builder = (0, ioc_di_1.Concat)(this, new webpack_builder_1.default(item.name));
+                const builder = (0, anydi_1.DiFrom)(this).for(() => new webpack_builder_1.default(item.name));
                 this.builders.push(builder);
                 return {
                     name: item.name,
@@ -52,10 +52,10 @@ let FilesProcess = class FilesProcess {
     }
 };
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", files_1.default)
 ], FilesProcess.prototype, "config", void 0);
 FilesProcess = __decorate([
-    (0, ioc_di_1.Service)()
+    (0, anydi_1.Service)()
 ], FilesProcess);
 exports.default = FilesProcess;

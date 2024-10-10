@@ -21,7 +21,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const electron_builder_1 = __importDefault(require("../../config/electron-builder"));
 const electron_builder_2 = require("electron-builder");
 const fs_1 = require("fs");
@@ -64,14 +64,14 @@ let ElectronBuilderProcess = class ElectronBuilderProcess {
     }
 };
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", electron_builder_1.default)
 ], ElectronBuilderProcess.prototype, "config", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", output_1.default)
 ], ElectronBuilderProcess.prototype, "output", void 0);
 ElectronBuilderProcess = __decorate([
-    (0, ioc_di_1.Service)()
+    (0, anydi_1.Service)()
 ], ElectronBuilderProcess);
 exports.default = ElectronBuilderProcess;

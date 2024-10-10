@@ -21,7 +21,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const logger_1 = __importDefault(require("../logger"));
 const rpc_1 = __importDefault(require("./rpc"));
 const webpack_1 = __importDefault(require("../terminal/impl/webpack"));
@@ -100,15 +100,15 @@ let WebpackBuilder = class WebpackBuilder {
     }
 };
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", terminal_1.default)
 ], WebpackBuilder.prototype, "terminal", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", logger_1.default)
 ], WebpackBuilder.prototype, "logger", void 0);
 WebpackBuilder = __decorate([
-    (0, ioc_di_1.Service)(),
+    (0, anydi_1.Service)(),
     __metadata("design:paramtypes", [String])
 ], WebpackBuilder);
 exports.default = WebpackBuilder;

@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var MainConfig_1;
 Object.defineProperty(exports, "__esModule", { value: true });
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const path_1 = __importDefault(require("path"));
 const main_1 = __importDefault(require("../../common/main"));
 const electron_1 = __importDefault(require("electron"));
@@ -109,11 +109,11 @@ MainConfig.ENV_KEY = main_1.default.ENV_KEY;
 MainConfig.DEFINE_KEY = main_1.default.DEFINE_KEY;
 MainConfig.MAIN = 'main';
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", output_1.default)
 ], MainConfig.prototype, "outputConfig", void 0);
 MainConfig = MainConfig_1 = __decorate([
-    (0, ioc_di_1.Service)(),
+    (0, anydi_1.Service)(),
     __metadata("design:paramtypes", [])
 ], MainConfig);
 exports.default = MainConfig;

@@ -21,7 +21,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const rpc_1 = __importDefault(require("./rpc"));
 const main_1 = __importDefault(require("../../../config/main"));
 const terminal_1 = __importDefault(require("../../../common/terminal"));
@@ -64,14 +64,14 @@ let MainTypeChecker = class MainTypeChecker {
     }
 };
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", main_1.default)
 ], MainTypeChecker.prototype, "config", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", terminal_1.default)
 ], MainTypeChecker.prototype, "terminal", void 0);
 MainTypeChecker = __decorate([
-    (0, ioc_di_1.Service)()
+    (0, anydi_1.Service)()
 ], MainTypeChecker);
 exports.default = MainTypeChecker;

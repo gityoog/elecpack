@@ -21,7 +21,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const webpack_builder_1 = __importDefault(require("../../common/webpack-builder"));
 const renderer_1 = __importDefault(require("../../config/renderer"));
 let RendererProcess = class RendererProcess {
@@ -45,14 +45,14 @@ let RendererProcess = class RendererProcess {
     }
 };
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", renderer_1.default)
 ], RendererProcess.prototype, "config", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", Object)
 ], RendererProcess.prototype, "builder", void 0);
 RendererProcess = __decorate([
-    (0, ioc_di_1.Service)()
+    (0, anydi_1.Service)()
 ], RendererProcess);
 exports.default = RendererProcess;

@@ -21,7 +21,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const webpack_builder_1 = __importDefault(require("../../common/webpack-builder"));
 const preload_1 = __importDefault(require("../../config/preload"));
 let PreloadProcess = class PreloadProcess {
@@ -45,14 +45,14 @@ let PreloadProcess = class PreloadProcess {
     }
 };
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", preload_1.default)
 ], PreloadProcess.prototype, "config", void 0);
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", Object)
 ], PreloadProcess.prototype, "builder", void 0);
 PreloadProcess = __decorate([
-    (0, ioc_di_1.Service)()
+    (0, anydi_1.Service)()
 ], PreloadProcess);
 exports.default = PreloadProcess;

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ioc_di_1 = require("@gityoog/ioc-di");
+const anydi_1 = require("anydi");
 const output_1 = __importDefault(require("../../output"));
 let WebpackBuilderBaseConfig = class WebpackBuilderBaseConfig {
     constructor(def) {
@@ -65,11 +65,11 @@ let WebpackBuilderBaseConfig = class WebpackBuilderBaseConfig {
     }
 };
 __decorate([
-    (0, ioc_di_1.Inject)(),
+    (0, anydi_1.Inject)(),
     __metadata("design:type", output_1.default)
 ], WebpackBuilderBaseConfig.prototype, "outputConfig", void 0);
 WebpackBuilderBaseConfig = __decorate([
-    (0, ioc_di_1.Service)(),
+    (0, anydi_1.Service)(),
     __metadata("design:paramtypes", [Object])
 ], WebpackBuilderBaseConfig);
 exports.default = WebpackBuilderBaseConfig;

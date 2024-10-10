@@ -5,7 +5,6 @@ export default class ElecpackDev {
     private renderer;
     private files;
     constructor();
-    private init;
     start(): Promise<void>;
     stop(): Promise<void>;
 }
