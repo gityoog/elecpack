@@ -1,4 +1,4 @@
-import { Inject, Service } from "@gityoog/ioc-di"
+import { Inject, Service } from "anydi"
 import ElectronBuilderConfig from "../../config/electron-builder"
 import { build, Platform } from 'electron-builder'
 import { readFileSync, writeFileSync } from "fs"

@@ -1,4 +1,4 @@
-import { Inject, Service } from "@gityoog/ioc-di"
+import { Inject, Service } from "anydi"
 import Logger from "../logger"
 import WebpackBuilderRunner from "./runner"
 import WebpackBuilderRpc from "./rpc"

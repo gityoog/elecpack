@@ -1,4 +1,4 @@
-import { Concat, Service } from "@gityoog/ioc-di"
+import { DiFrom, Service } from "anydi"
 import WebpackBuilderFileConfig from "../webpack/file"
 
 @Service()
@@ -15,7 +15,7 @@ class FilesConfig {
         entry: { [FilesConfig.main]: options.entry },
 
       }
-      const config = Concat(this, new WebpackBuilderFileConfig({ name, output: 'files/' + name }))
+      const config = DiFrom(this).for(() => new WebpackBuilderFileConfig({ name, output: 'files/' + name }))
       config.setOptions(fileOptions)
       return {
         name,

@@ -1,4 +1,4 @@
-import { Inject, Service } from "@gityoog/ioc-di"
+import { Inject, Service } from "anydi"
 import MainTypeCheckerRpc from "./rpc"
 import MainConfig from "../../../config/main"
 import Terminal from "../../../common/terminal"

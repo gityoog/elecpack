@@ -1,4 +1,4 @@
-import { Inject, Service } from "@gityoog/ioc-di"
+import { Inject, Service } from "anydi"
 import { Arch, Configuration, Platform } from 'electron-builder'
 import OutputConfig from "../output"
 

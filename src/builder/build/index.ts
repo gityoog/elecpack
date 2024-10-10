@@ -1,4 +1,4 @@
-import { Inject, Service } from "@gityoog/ioc-di"
+import { Inject, Service } from "anydi"
 import FilesProcess from "../../process/files"
 import MainProdProcess from "../../process/main/prod"
 import PreloadProcess from "../../process/preload"

@@ -1,4 +1,4 @@
-import { Already, Inject, Service } from "@gityoog/ioc-di"
+import { Inject, Service } from "anydi"
 import FilesProcess from "../../process/files"
 import MainDevProcess from "../../process/main/dev"
 import PreloadProcess from "../../process/preload"
@@ -15,18 +15,12 @@ export default class ElecpackDev {
   @Inject() private files!: FilesProcess
 
   constructor() {
-    this.init()
-  }
-
-  @Already
-  private init() {
     this.main.onStop(() => {
       this.preload.stop()
       this.renderer.stop()
       this.files.stop()
     })
   }
-
 
   async start() {
     await rimraf(this.output.resolve())

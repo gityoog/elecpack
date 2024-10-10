@@ -1,4 +1,4 @@
-import { Service } from "@gityoog/ioc-di"
+import { Service } from "anydi"
 import WebpackBuilderHtmlConfig from "../webpack/html"
 
 @Service()

@@ -1,4 +1,4 @@
-import { Inject, Service } from "@gityoog/ioc-di"
+import { Inject, Service } from "anydi"
 import ElectronBuilderConfig from "./electron-builder"
 import MainConfig from "./main"
 import PreloadConfig from "./preload"

@@ -1,4 +1,4 @@
-import { Inject, Service, ToType } from "@gityoog/ioc-di"
+import { Inject, Service } from "anydi"
 import WebpackBuilder from "../../../common/webpack-builder"
 import HtmlWebpackPlugin from "html-webpack-plugin"
 import OutputConfig from "../../output"

@@ -1,4 +1,4 @@
-import { Already, Concat, Inject, Root, Service } from "@gityoog/ioc-di"
+import { Inject, Root, Service } from "anydi"
 import ElecpackBuild from "./build"
 import Config from "../config"
 import ElecpackDev from "./dev"
@@ -10,11 +10,6 @@ class ElecpackBuilder {
   @Inject() private dev!: ElecpackDev
   @Inject() private build!: ElecpackBuild
   constructor(private options: Config.Options) {
-    this.init()
-  }
-
-  @Already
-  private init() {
     this.config.setOptions(this.options)
   }
 

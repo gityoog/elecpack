@@ -1,6 +1,6 @@
 import { spawn, ChildProcessWithoutNullStreams } from 'child_process'
 import Watchpack from 'watchpack'
-import { Inject, Service } from '@gityoog/ioc-di'
+import { Inject, Service } from 'anydi'
 import Logger from '../../../common/logger'
 import MainConfig from '../../../config/main'
 import Terminal from '../../../common/terminal'
