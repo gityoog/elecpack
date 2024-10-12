@@ -32,7 +32,7 @@ let MainConfig = MainConfig_1 = class MainConfig {
         this.checker = options.checker !== false;
         this.output = this.outputConfig.resolve(MainConfig_1.MAIN);
         this.bytecode = options.bytecode;
-        this.configFile = [require.resolve('./config')].concat(options.configFile || []);
+        this.configFile = (options.skipDefConfigFile ? [] : [require.resolve('./config')]).concat(options.configFile || []);
         if (options.electron) {
             this.electron = options.electron;
         }

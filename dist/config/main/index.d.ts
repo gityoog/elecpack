@@ -8,6 +8,7 @@ type options = {
     define?: Record<string, any>;
     bytecode?: boolean | 'all' | 'production' | 'development';
     configFile?: string | string[];
+    skipDefConfigFile?: boolean;
 };
 declare class MainConfig {
     static ENV_KEY: string;
