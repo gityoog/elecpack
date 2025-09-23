@@ -2,7 +2,6 @@ import { Inject, Service } from "anydi"
 import WebpackBuilder from "../../common/webpack-builder"
 import path from "path"
 import MainCommon from "../../common/main"
-import electron from "electron"
 import OutputConfig from "../output"
 
 type options = {
@@ -35,7 +34,16 @@ class MainConfig {
   private configFile: string[] = []
   private electron: string
   constructor() {
-    this.electron = electron as unknown as string
+    try {
+      const electron = require('electron')
+      if (electron && electron.default) {
+        this.electron = electron.default as unknown as string
+      } else {
+        this.electron = electron as unknown as string
+      }
+    } catch (e) {
+      this.electron = ''
+    }
   }
   setOptions(options: options) {
     this.context = options.context

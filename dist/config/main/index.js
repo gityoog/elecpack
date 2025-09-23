@@ -16,13 +16,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const anydi_1 = require("anydi");
 const path_1 = __importDefault(require("path"));
 const main_1 = __importDefault(require("../../common/main"));
-const electron_1 = __importDefault(require("electron"));
 const output_1 = __importDefault(require("../output"));
 let MainConfig = MainConfig_1 = class MainConfig {
     constructor() {
         this.checker = true;
         this.configFile = [];
-        this.electron = electron_1.default;
+        try {
+            const electron = require('electron');
+            if (electron && electron.default) {
+                this.electron = electron.default;
+            }
+            else {
+                this.electron = electron;
+            }
+        }
+        catch (e) {
+            this.electron = '';
+        }
     }
     setOptions(options) {
         this.context = options.context;
