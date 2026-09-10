@@ -38,6 +38,9 @@ class Config {
       },
       ...options.logger
     })
+    if (options.output) {
+      this.output.setOptions(options.output)
+    }
     this.main.setOptions(options.main)
     this.preload.setOptions(options.preload)
     this.renderer.setOptions(options.renderer)
@@ -45,10 +48,6 @@ class Config {
     if (options.electronBuilder) {
       this.electronBuilder.setOptions(options.electronBuilder)
     }
-    if (options.output) {
-      this.output.setOptions(options.output)
-    }
-
   }
 }
 

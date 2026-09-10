@@ -28,15 +28,15 @@ let Config = class Config {
             }, categories: {
                 default: { appenders: ['file'], level: 'debug' }
             } }, options.logger));
+        if (options.output) {
+            this.output.setOptions(options.output);
+        }
         this.main.setOptions(options.main);
         this.preload.setOptions(options.preload);
         this.renderer.setOptions(options.renderer);
         this.files.setOptions(options.files || {});
         if (options.electronBuilder) {
             this.electronBuilder.setOptions(options.electronBuilder);
-        }
-        if (options.output) {
-            this.output.setOptions(options.output);
         }
     }
 };
