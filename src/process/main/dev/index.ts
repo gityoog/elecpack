@@ -75,6 +75,7 @@ export default class MainDevProcess {
     this.child = spawn(electronPath, [bootsharp, entry], {
       stdio: 'pipe',
       env: {
+        ...process.env,
         [MainConfig.DEFINE_KEY]: JSON.stringify(this.config.getDefine()),
         [MainConfig.ENV_KEY]: JSON.stringify({
           assets: this.config.getAssets(),

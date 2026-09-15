@@ -76,15 +76,12 @@ let MainDevProcess = class MainDevProcess {
         this.logger.debug('main', 'start', electronPath, bootsharp, entry);
         this.child = (0, child_process_1.spawn)(electronPath, [bootsharp, entry], {
             stdio: 'pipe',
-            env: {
-                [main_1.default.DEFINE_KEY]: JSON.stringify(this.config.getDefine()),
-                [main_1.default.ENV_KEY]: JSON.stringify({
+            env: Object.assign(Object.assign({}, process.env), { [main_1.default.DEFINE_KEY]: JSON.stringify(this.config.getDefine()), [main_1.default.ENV_KEY]: JSON.stringify({
                     assets: this.config.getAssets(),
                     preload: this.env.preload,
                     files: this.env.files,
                     renderer: this.env.renderer
-                })
-            }
+                }) })
         });
         this.console.apply(this.child);
         this.status = true;
